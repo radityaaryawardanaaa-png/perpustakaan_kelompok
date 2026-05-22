@@ -1,291 +1,469 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Buku - Perpustakaan</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body{
-            background:#f4f6f9;
-            padding:20px;
-        }
+<title>Data Buku</title>
 
-        .container{
-            background:white;
-            padding:20px;
-            border-radius:10px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-        }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        h2{
-            margin-bottom:20px;
-            color:#333;
-        }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        .top-box{
-            display:flex;
-            gap:20px;
-            margin-bottom:20px;
-        }
+<style>
 
-        .card{
-            flex:1;
-            background:white;
-            padding:20px;
-            border-radius:10px;
-            text-align:center;
-            box-shadow:0 2px 8px rgba(0,0,0,0.1);
-        }
+body{
+    margin:0;
+    background:#eef2f7;
+    font-family:Arial;
+}
 
-        .card h1{
-            margin-top:10px;
-            color:#2d3e50;
-        }
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#4e73df,#224abe);
+    position:fixed;
+    left:0;
+    top:0;
+    color:white;
+}
 
-        .btn-group{
-            margin-bottom:20px;
-        }
+.logo{
+    text-align:center;
+    padding:30px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+}
 
-        button{
-            border:none;
-            padding:10px 15px;
-            border-radius:5px;
-            color:white;
-            cursor:pointer;
-            margin-right:10px;
-        }
+.logo i{
+    font-size:45px;
+}
 
-        .btn-tambah{
-            background:#28a745;
-        }
+.logo h4{
+    margin-top:10px;
+    font-weight:bold;
+}
 
-        .btn-edit{
-            background:#f0ad4e;
-        }
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px 25px;
+    transition:0.3s;
+}
 
-        .btn-hapus{
-            background:#dc3545;
-        }
+.sidebar a:hover{
+    background:rgba(255,255,255,0.2);
+    padding-left:35px;
+}
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
+.active{
+    background:rgba(255,255,255,0.2);
+}
 
-        table thead{
-            background:#1f3c88;
-            color:white;
-        }
+.main{
+    margin-left:260px;
+    padding:25px;
+}
 
-        table th,
-        table td{
-            padding:12px;
-            border-bottom:1px solid #ddd;
-            text-align:left;
-        }
+.topbar{
+    background:white;
+    padding:20px 25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+}
 
-        .status{
-            padding:5px 10px;
-            border-radius:20px;
-            font-size:12px;
-            color:white;
-        }
+.card-box{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
 
-        .tersedia{
-            background:#28a745;
-        }
+.table td{
+    vertical-align:middle;
+}
 
-        .dipinjam{
-            background:#f0ad4e;
-        }
+.badge{
+    padding:10px;
+    border-radius:10px;
+}
 
-    </style>
+.btn{
+    border-radius:10px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div class="container">
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-    <div class="top-box">
+    <div class="logo">
 
-        <div class="card">
-            <h3>Total Buku</h3>
-            <h1 id="totalBuku">0</h1>
-        </div>
+        <i class="fas fa-book-reader"></i>
 
-        <div class="card">
-            <h3>Tersedia</h3>
-            <h1 id="tersedia">0</h1>
-        </div>
-
-        <div class="card">
-            <h3>Dipinjam</h3>
-            <h1 id="dipinjam">0</h1>
-        </div>
-
-        <div class="card">
-            <h3>Anggota</h3>
-            <h1>5</h1>
-        </div>
+        <h4>PERPUSTAKAAN</h4>
 
     </div>
 
-    <div class="btn-group">
-        <button class="btn-tambah" onclick="tambahBuku()">
-            + Tambah Buku
-        </button>
+    <a href="dashboard.html">
 
-        <button class="btn-edit" onclick="editbuku()">
-            Edit Buku
-        </button>
+        <i class="fas fa-home me-2"></i>
 
-        <button class="btn-hapus" onclick="hapusbuku()">
-            Hapus Buku
-        </button>
-    </div>
+        Dashboard
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Judul</th>
-                <th>Pengarang</th>
-                <th>Status</th>
-            </tr>
-        </thead>
+    </a>
 
-        <tbody id="listBuku"></tbody>
-    </table>
+    <a href="anggota.html">
+
+        <i class="fas fa-users me-2"></i>
+
+        Anggota
+
+    </a>
+
+    <a href="buku.html" class="active">
+
+        <i class="fas fa-book me-2"></i>
+
+        Buku
+
+    </a>
+
+    <a href="peminjaman.html">
+
+        <i class="fas fa-hand-holding me-2"></i>
+
+        Peminjaman
+
+    </a>
 
 </div>
+
+
+
+<!-- MAIN -->
+<div class="main">
+
+    <div class="topbar d-flex justify-content-between align-items-center">
+
+        <div>
+
+            <h3>
+
+                <i class="fas fa-book text-primary me-2"></i>
+
+                Data Buku
+
+            </h3>
+
+            <small class="text-muted">
+                Kelola buku perpustakaan
+            </small>
+
+        </div>
+
+        <button
+        class="btn btn-primary"
+        onclick="tambahBuku()">
+
+            <i class="fas fa-plus me-2"></i>
+
+            Tambah Buku
+
+        </button>
+
+    </div>
+
+
+
+    <!-- TABLE -->
+    <div class="card-box">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>No</th>
+                        <th>Judul Buku</th>
+                        <th>Penulis</th>
+                        <th>Tahun</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="dataBuku">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 
 <script>
 
 let buku = [
-    {
-        judul:"Laskar Pelangi",
-        pengarang:"Andrea Hirata",
-        status:"tersedia"
-    },
 
-    {
-        judul:"Bumi",
-        pengarang:"Tere Liye",
-        status:"dipinjam"
-    },
+{
+judul:"Laskar Pelangi",
+penulis:"Andrea Hirata",
+tahun:"2005",
+status:"Dipinjam"
+},
 
-    {
-        judul:"Negeri 5 Menara",
-        pengarang:"Ahmad Fuadi",
-        status:"tersedia"
-    },
+{
+judul:"Bumi",
+penulis:"Tere Liye",
+tahun:"2014",
+status:"Dipinjam"
+},
 
-    {
-        judul:"Dilan 1990",
-        pengarang:"Pidi Baiq",
-        status:"dipinjam"
-    },
+{
+judul:"Dilan 1990",
+penulis:"Pidi Baiq",
+tahun:"2014",
+status:"Dipinjam"
+},
 
-    {
-        judul:"Ayat-Ayat Cinta",
-        pengarang:"Habiburrahman El Shirazy",
-        status:"tersedia"
-    },
+{
+judul:"Negeri 5 Menara",
+penulis:"Ahmad Fuadi",
+tahun:"2009",
+status:"Dipinjam"
+},
 
-    {
-        judul:"Perahu Kertas",
-        pengarang:"Dee Lestari",
-        status:"tersedia"
-    },
+{
+judul:"Ayat Ayat Cinta",
+penulis:"Habiburrahman El Shirazy",
+tahun:"2004",
+status:"Tersedia"
+},
 
-    {
-        judul:"Pulang",
-        pengarang:"Tere Liye",
-        status:"dipinjam"
-    },
+{
+judul:"Perahu Kertas",
+penulis:"Dee Lestari",
+tahun:"2009",
+status:"Tersedia"
+},
 
-    {
-        judul:"Rindu",
-        pengarang:"Tere Liye",
-        status:"tersedia"
-    },
+{
+judul:"Pulang",
+penulis:"Tere Liye",
+tahun:"2015",
+status:"Tersedia"
+},
 
-    {
-        judul:"Sang Pemimpi",
-        pengarang:"Andrea Hirata",
-        status:"tersedia"
-    },
+{
+judul:"Rindu",
+penulis:"Tere Liye",
+tahun:"2014",
+status:"Tersedia"
+},
 
-    {
-        judul:"5 cm",
-        pengarang:"Donny Dhirgantoro",
-        status:"dipinjam"
-    }
+{
+judul:"Sang Pemimpi",
+penulis:"Andrea Hirata",
+tahun:"2006",
+status:"Tersedia"
+},
+
+{
+judul:"5 CM",
+penulis:"Donny Dhirgantoro",
+tahun:"2005",
+status:"Tersedia"
+}
+
 ];
+
+
+
+tampilBuku();
 
 function tampilBuku(){
 
-    let tabel = document.getElementById("listBuku");
+let tabel =
+document.getElementById("dataBuku");
 
-    tabel.innerHTML = "";
+tabel.innerHTML = "";
 
-    let tersedia = 0;
-    let dipinjam = 0;
+buku.forEach((item,index)=>{
 
-    buku.forEach((item,index)=>{
+let warna =
+item.status == "Tersedia"
+?
+"success"
+:
+"warning text-dark";
 
-        if(item.status == "tersedia"){
-            tersedia++;
-        }else{
-            dipinjam++;
-        }
 
-        tabel.innerHTML += `
-        
-        <tr>
-            <td>${index + 1}</td>
-            <td>${item.judul}</td>
-            <td>${item.pengarang}</td>
-            <td>
-                <span class="status ${item.status}">
-                    ${item.status}
-                </span>
-            </td>
-        </tr>
+tabel.innerHTML += `
 
-        `;
-    });
+<tr>
 
-    document.getElementById("totalBuku").innerHTML = buku.length;
-    document.getElementById("tersedia").innerHTML = tersedia;
-    document.getElementById("dipinjam").innerHTML = dipinjam;
+<td>${index + 1}</td>
+
+<td>
+
+<b>${item.judul}</b>
+
+</td>
+
+<td>${item.penulis}</td>
+
+<td>${item.tahun}</td>
+
+<td>
+
+<span class="badge bg-${warna}">
+
+${item.status}
+
+</span>
+
+</td>
+
+<td>
+
+<button
+class="btn btn-primary btn-sm"
+onclick="pinjamBuku(${index})">
+
+<i class="fas fa-book"></i>
+
+</button>
+
+<button
+class="btn btn-danger btn-sm"
+onclick="hapusBuku(${index})">
+
+<i class="fas fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
 }
+
+
 
 function tambahBuku(){
 
-    let judul = prompt("Masukkan Judul Buku");
-    let pengarang = prompt("Masukkan Nama Pengarang");
+let judul =
+prompt("Masukkan Judul Buku");
 
-    if(judul != "" && pengarang != ""){
+let penulis =
+prompt("Masukkan Penulis");
 
-        buku.push({
-            judul:judul,
-            pengarang:pengarang,
-            status:"tersedia"
-        });
+let tahun =
+prompt("Masukkan Tahun");
 
-        tampilBuku();
-    }
-}
+if(judul && penulis && tahun){
+
+buku.push({
+
+judul:judul,
+penulis:penulis,
+tahun:tahun,
+status:"Tersedia"
+
+});
 
 tampilBuku();
+
+}
+
+}
+
+
+
+function hapusBuku(index){
+
+if(confirm("Yakin ingin hapus buku?")){
+
+buku.splice(index,1);
+
+tampilBuku();
+
+}
+
+}
+
+
+
+function pinjamBuku(index){
+
+if(buku[index].status == "Dipinjam"){
+
+alert("Buku sedang dipinjam!");
+
+return;
+
+}
+
+let nama =
+prompt("Masukkan Nama Peminjam");
+
+if(nama == "" || nama == null){
+
+return;
+
+}
+
+
+let dataPinjam =
+JSON.parse(localStorage.getItem("pinjam")) || [];
+
+
+dataPinjam.push({
+
+nama:nama,
+buku:buku[index].judul,
+tanggal:new Date().toLocaleDateString()
+
+});
+
+
+localStorage.setItem(
+"pinjam",
+JSON.stringify(dataPinjam)
+);
+
+
+buku[index].status = "Dipinjam";
+
+
+tampilBuku();
+
+alert("Buku berhasil dipinjam!");
+
+}
 
 </script>
 
