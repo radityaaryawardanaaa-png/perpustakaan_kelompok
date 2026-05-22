@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan - Kelompok Perpustakaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; }
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: white; text-align: center;
+        }
+        .hero-icon { font-size: 100px; margin-bottom: 30px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+        .btn-hero {
+            padding: 15px 50px; font-size: 1.2rem; border-radius: 50px;
+            background: white; color: #667eea; border: none; font-weight: 600;
+            transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .btn-hero:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .features { padding: 80px 0; background: #f8f9fc; }
+        .feature-card {
+            background: white; border-radius: 20px; padding: 40px 30px;
+            text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s; height: 100%;
+        }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .feature-icon {
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 25px; font-size: 35px; color: white;
+        }
+        .bg-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .bg-green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .bg-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .bg-orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .mode-switch {
+            position: fixed; bottom: 20px; right: 20px;
+            background: white; padding: 10px 20px; border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div>
+        <i class="fas fa-book-reader hero-icon"></i>
+        <h1 class="display-4 fw-bold mb-4">Sistem Perpustakaan</h1>
+        <p class="lead mb-5">Kelompok Perpustakaan - Kelola buku dengan mudah</p>
+        <a href="login.html" class="btn btn-hero">
+            <i class="fas fa-sign-in-alt me-2"></i>Masuk ke Sistem
+        </a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Fitur Unggulan</h2>
+            <p class="text-muted">Semua yang Anda butuhkan untuk mengelola perpustakaan</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-purple"><i class="fas fa-book"></i></div>
+                    <h4>Kelola Buku</h4>
+                    <p>Katalog lengkap dengan informasi judul, pengarang, stok, dan status</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-green"><i class="fas fa-users"></i></div>
+                    <h4>Data Anggota</h4>
+                    <p>Pendataan anggota perpustakaan dengan informasi lengkap</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-blue"><i class="fas fa-hand-holding"></i></div>
+                    <h4>Peminjaman</h4>
+                    <p>Catat peminjaman buku, pantau buku yang sedang dipinjam</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-orange"><i class="fas fa-chart-bar"></i></div>
+                    <h4>Laporan</h4>
+                    <p>Statistik dan laporan peminjaman untuk analisis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="mode-switch">
+    <small><i class="fas fa-code me-2"></i>Mode: <strong>HTML/JS</strong> (Go Live)</small><br>
+    <a href="login.php" class="text-primary"><small>Switch ke PHP Mode →</small></a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
