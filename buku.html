@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data Buku</title>
+<title>Data Buku - Perpustakaan</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,14 +21,14 @@ body{
     font-family:Arial;
 }
 
+/* SIDEBAR */
 .sidebar{
     width:260px;
     height:100vh;
-    background:linear-gradient(180deg,#4e73df,#224abe);
     position:fixed;
-    left:0;
-    top:0;
+    background:linear-gradient(180deg,#4e73df,#224abe);
     color:white;
+    overflow:auto;
 }
 
 .logo{
@@ -38,7 +38,7 @@ body{
 }
 
 .logo i{
-    font-size:45px;
+    font-size:50px;
 }
 
 .logo h4{
@@ -63,6 +63,8 @@ body{
     background:rgba(255,255,255,0.2);
 }
 
+
+/* MAIN */
 .main{
     margin-left:260px;
     padding:25px;
@@ -72,8 +74,8 @@ body{
     background:white;
     padding:20px 25px;
     border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
     margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
 .card-box{
@@ -87,13 +89,24 @@ body{
     vertical-align:middle;
 }
 
-.badge{
-    padding:10px;
+.btn{
     border-radius:10px;
 }
 
-.btn{
+.badge{
     border-radius:10px;
+    padding:8px 12px;
+}
+
+.book-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#4e73df;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 </style>
@@ -101,6 +114,7 @@ body{
 </head>
 
 <body>
+
 
 <!-- SIDEBAR -->
 <div class="sidebar">
@@ -160,6 +174,7 @@ body{
 <!-- MAIN -->
 <div class="main">
 
+    <!-- TOPBAR -->
     <div class="topbar d-flex justify-content-between align-items-center">
 
         <div>
@@ -173,7 +188,9 @@ body{
             </h3>
 
             <small class="text-muted">
+
                 Kelola buku perpustakaan
+
             </small>
 
         </div>
@@ -230,25 +247,26 @@ body{
 
 <script>
 
-// ==========================
-// DATA BUKU
-// ==========================
+// ======================================
+// RESET DATA LAMA AGAR TIDAK NYANGKUT
+// ======================================
 
-let buku =
-JSON.parse(localStorage.getItem("buku")) || [
+if(!localStorage.getItem("buku")){
+
+let defaultBuku = [
 
 {
 judul:"Laskar Pelangi",
 penulis:"Andrea Hirata",
 tahun:"2005",
-status:"Dipinjam"
+status:"Tersedia"
 },
 
 {
 judul:"Bumi",
 penulis:"Tere Liye",
 tahun:"2014",
-status:"Dipinjam"
+status:"Tersedia"
 },
 
 {
@@ -269,7 +287,7 @@ status:"Tersedia"
 judul:"Ayat Ayat Cinta",
 penulis:"Habiburrahman",
 tahun:"2004",
-status:"Dipinjam"
+status:"Tersedia"
 },
 
 {
@@ -309,11 +327,27 @@ status:"Tersedia"
 
 ];
 
+localStorage.setItem(
+"buku",
+JSON.stringify(defaultBuku)
+);
+
+}
 
 
-// ==========================
+
+// ======================================
+// AMBIL DATA
+// ======================================
+
+let buku =
+JSON.parse(localStorage.getItem("buku"));
+
+
+
+// ======================================
 // SIMPAN DATA
-// ==========================
+// ======================================
 
 function simpanData(){
 
@@ -326,9 +360,9 @@ JSON.stringify(buku)
 
 
 
-// ==========================
+// ======================================
 // TAMPILKAN BUKU
-// ==========================
+// ======================================
 
 function tampilBuku(){
 
@@ -347,14 +381,6 @@ item.status == "Tersedia"
 "warning text-dark";
 
 
-let icon =
-item.status == "Tersedia"
-?
-"fa-circle-check"
-:
-"fa-book-reader";
-
-
 tabel.innerHTML += `
 
 <tr>
@@ -369,13 +395,12 @@ tabel.innerHTML += `
 
 </td>
 
+
 <td>
 
 <div class="d-flex align-items-center">
 
-<div
-class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center me-3"
-style="width:45px;height:45px;">
+<div class="book-icon me-3">
 
 <i class="fas fa-book"></i>
 
@@ -401,6 +426,7 @@ Novel Perpustakaan
 
 </td>
 
+
 <td>
 
 <i class="fas fa-user-edit text-secondary me-2"></i>
@@ -408,6 +434,7 @@ Novel Perpustakaan
 ${item.penulis}
 
 </td>
+
 
 <td>
 
@@ -419,17 +446,17 @@ ${item.tahun}
 
 </td>
 
+
 <td>
 
 <span class="badge bg-${warna}">
-
-<i class="fas ${icon} me-1"></i>
 
 ${item.status}
 
 </span>
 
 </td>
+
 
 <td>
 
@@ -440,6 +467,7 @@ onclick="pinjamBuku(${index})">
 <i class="fas fa-book-open"></i>
 
 </button>
+
 
 <button
 class="btn btn-danger btn-sm"
@@ -461,9 +489,9 @@ onclick="hapusBuku(${index})">
 
 
 
-// ==========================
+// ======================================
 // TAMBAH BUKU
-// ==========================
+// ======================================
 
 function tambahBuku(){
 
@@ -497,9 +525,9 @@ tampilBuku();
 
 
 
-// ==========================
+// ======================================
 // HAPUS BUKU
-// ==========================
+// ======================================
 
 function hapusBuku(index){
 
@@ -517,9 +545,9 @@ tampilBuku();
 
 
 
-// ==========================
+// ======================================
 // PINJAM BUKU
-// ==========================
+// ======================================
 
 function pinjamBuku(index){
 
@@ -542,6 +570,8 @@ return;
 }
 
 
+
+// simpan data peminjaman
 let dataPinjam =
 JSON.parse(localStorage.getItem("pinjam")) || [];
 
@@ -561,8 +591,9 @@ JSON.stringify(dataPinjam)
 );
 
 
-buku[index].status = "Dipinjam";
 
+// ubah status buku
+buku[index].status = "Dipinjam";
 
 simpanData();
 
@@ -574,9 +605,9 @@ alert("Buku berhasil dipinjam!");
 
 
 
-// ==========================
+// ======================================
 // JALANKAN
-// ==========================
+// ======================================
 
 tampilBuku();
 
