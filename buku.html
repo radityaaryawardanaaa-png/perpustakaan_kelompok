@@ -145,6 +145,14 @@ body{
 
     </a>
 
+    <a href="dipinjam.html">
+
+        <i class="fas fa-book-reader me-2"></i>
+
+        Buku Dipinjam
+
+    </a>
+
 </div>
 
 
@@ -222,7 +230,12 @@ body{
 
 <script>
 
-let buku = [
+// ==========================
+// DATA BUKU
+// ==========================
+
+let buku =
+JSON.parse(localStorage.getItem("buku")) || [
 
 {
 judul:"Laskar Pelangi",
@@ -254,7 +267,7 @@ status:"Dipinjam"
 
 {
 judul:"Ayat Ayat Cinta",
-penulis:"Habiburrahman El Shirazy",
+penulis:"Habiburrahman",
 tahun:"2004",
 status:"Tersedia"
 },
@@ -298,7 +311,24 @@ status:"Tersedia"
 
 
 
-tampilBuku();
+// ==========================
+// SIMPAN DATA
+// ==========================
+
+function simpanData(){
+
+localStorage.setItem(
+"buku",
+JSON.stringify(buku)
+);
+
+}
+
+
+
+// ==========================
+// TAMPILKAN BUKU
+// ==========================
 
 function tampilBuku(){
 
@@ -317,25 +347,83 @@ item.status == "Tersedia"
 "warning text-dark";
 
 
+let icon =
+item.status == "Tersedia"
+?
+"fa-circle-check"
+:
+"fa-book-reader";
+
+
 tabel.innerHTML += `
 
 <tr>
 
-<td>${index + 1}</td>
-
 <td>
 
-<b>${item.judul}</b>
+<span class="fw-bold text-primary">
+
+#${index + 1}
+
+</span>
 
 </td>
 
-<td>${item.penulis}</td>
+<td>
 
-<td>${item.tahun}</td>
+<div class="d-flex align-items-center">
+
+<div
+class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center me-3"
+style="width:45px;height:45px;">
+
+<i class="fas fa-book"></i>
+
+</div>
+
+<div>
+
+<div class="fw-bold">
+
+${item.judul}
+
+</div>
+
+<small class="text-muted">
+
+Novel Perpustakaan
+
+</small>
+
+</div>
+
+</div>
+
+</td>
+
+<td>
+
+<i class="fas fa-user-edit text-secondary me-2"></i>
+
+${item.penulis}
+
+</td>
+
+<td>
+
+<span class="badge bg-info">
+
+${item.tahun}
+
+</span>
+
+</td>
 
 <td>
 
 <span class="badge bg-${warna}">
+
+<i class="fas ${icon} me-1"></i>
 
 ${item.status}
 
@@ -349,7 +437,7 @@ ${item.status}
 class="btn btn-primary btn-sm"
 onclick="pinjamBuku(${index})">
 
-<i class="fas fa-book"></i>
+<i class="fas fa-book-open"></i>
 
 </button>
 
@@ -373,6 +461,10 @@ onclick="hapusBuku(${index})">
 
 
 
+// ==========================
+// TAMBAH BUKU
+// ==========================
+
 function tambahBuku(){
 
 let judul =
@@ -395,6 +487,8 @@ status:"Tersedia"
 
 });
 
+simpanData();
+
 tampilBuku();
 
 }
@@ -402,6 +496,10 @@ tampilBuku();
 }
 
 
+
+// ==========================
+// HAPUS BUKU
+// ==========================
 
 function hapusBuku(index){
 
@@ -409,6 +507,8 @@ if(confirm("Yakin ingin hapus buku?")){
 
 buku.splice(index,1);
 
+simpanData();
+
 tampilBuku();
 
 }
@@ -416,6 +516,10 @@ tampilBuku();
 }
 
 
+
+// ==========================
+// PINJAM BUKU
+// ==========================
 
 function pinjamBuku(index){
 
@@ -427,10 +531,11 @@ return;
 
 }
 
+
 let nama =
 prompt("Masukkan Nama Peminjam");
 
-if(nama == "" || nama == null){
+if(!nama){
 
 return;
 
@@ -459,11 +564,21 @@ JSON.stringify(dataPinjam)
 buku[index].status = "Dipinjam";
 
 
+simpanData();
+
 tampilBuku();
 
 alert("Buku berhasil dipinjam!");
 
 }
+
+
+
+// ==========================
+// JALANKAN
+// ==========================
+
+tampilBuku();
 
 </script>
 
